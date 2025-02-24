@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="main-wrapper">
+    <div class="form-container">
+      <h2 class="form-heading">Add New Patient</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            name="name"
+            id="name"
+            class="input-field"
+            placeholder="Patient's Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input
+            type="number"
+            [(ngModel)]="age"
+            name="age"
+            id="age"
+            class="input-field"
+            placeholder="Patient's Age"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select [(ngModel)]="gender" name="gender" id="gender" class="input-field">
+            <option value="Select" selected>Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button
+            *ngIf="!isEditing"
+            type="submit"
+            class="button add-button"
+            (click)="onAddClick()"
+          >
+            Add
+          </button>
+          <button
+            *ngIf="isEditing"
+            type="submit"
+            class="button update-button"
+            (click)="onUpdateClick()"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="patients-list-container">
+      <h2 class="list-heading">Patients ({{ PatientsArray.length }})</h2>
+      <div class="patients-list">
+        <div *ngFor="let patient of PatientsArray" class="patient-card">
+          <div class="patient-info">
+            <p><strong>Name:</strong> {{ patient.name }}</p>
+            <p><strong>Age:</strong> {{ patient.age }}</p>
+            <p><strong>Gender:</strong> {{ patient.gender }}</p>
+          </div>
+          <div class="action-buttons">
+            <button class="button edit-button" (click)="onEditPatient(patient._id)">Edit</button>
+            <button class="button delete-button" (click)="onDeletePatient(patient._id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
